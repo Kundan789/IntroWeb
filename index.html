@@ -1498,10 +1498,224 @@
       font-size: 0.9rem;
       line-height: 1.8;
     }
+
+    /* ─────────────────────────────────
+       PRELOADER
+    ───────────────────────────────── */
+    #preloader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: #050a16;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      transition: opacity 0.7s ease, transform 0.7s ease;
+      overflow: hidden;
+    }
+
+    [data-theme="light"] #preloader {
+      background: #f0f4ff;
+    }
+
+    #preloader.hide {
+      opacity: 0;
+      transform: translateY(-30px);
+      pointer-events: none;
+    }
+
+    /* floating words in background */
+    .pl-word {
+      position: absolute;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 900;
+      font-size: clamp(0.7rem, 2vw, 1rem);
+      color: rgba(79, 142, 247, 0.06);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      pointer-events: none;
+      animation: plFloat linear infinite;
+      white-space: nowrap;
+    }
+
+    [data-theme="light"] .pl-word {
+      color: rgba(59, 125, 232, 0.07);
+    }
+
+    @keyframes plFloat {
+      0% {
+        transform: translateY(110vh) rotate(-6deg);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 1;
+      }
+
+      90% {
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(-20vh) rotate(-6deg);
+        opacity: 0;
+      }
+    }
+
+    /* logo */
+    .pl-logo {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(2.8rem, 8vw, 4.5rem);
+      font-weight: 900;
+      background: linear-gradient(135deg, #4f8ef7, #a259ff, #00e5c3);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -2px;
+      animation: plPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+      position: relative;
+      z-index: 1;
+    }
+
+    @keyframes plPop {
+      from {
+        opacity: 0;
+        transform: scale(0.7);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* role typewriter line */
+    .pl-role {
+      font-size: clamp(0.8rem, 2.5vw, 1rem);
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #7a90b5;
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 2px solid #4f8ef7;
+      width: 0;
+      animation: plType 1.4s steps(24, end) 0.5s forwards,
+        plBlink 0.75s step-end 0.5s 3;
+    }
+
+    @keyframes plType {
+      to {
+        width: 18ch;
+      }
+    }
+
+    @keyframes plBlink {
+
+      0%,
+      100% {
+        border-color: #4f8ef7;
+      }
+
+      50% {
+        border-color: transparent;
+      }
+    }
+
+    /* progress bar */
+    .pl-bar-wrap {
+      width: min(280px, 60vw);
+      height: 3px;
+      background: rgba(79, 142, 247, 0.12);
+      border-radius: 3px;
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+    }
+
+    .pl-bar {
+      height: 100%;
+      border-radius: 3px;
+      background: linear-gradient(90deg, #4f8ef7, #a259ff, #00e5c3);
+      background-size: 200% 100%;
+      width: 0%;
+      animation: plProgress 1.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards,
+        plShimmer 1.8s linear 0.2s infinite;
+    }
+
+    @keyframes plProgress {
+      0% {
+        width: 0%;
+      }
+
+      60% {
+        width: 75%;
+      }
+
+      100% {
+        width: 100%;
+      }
+    }
+
+    @keyframes plShimmer {
+      0% {
+        background-position: 200% center;
+      }
+
+      100% {
+        background-position: -200% center;
+      }
+    }
+
+    /* tagline */
+    .pl-tag {
+      font-size: 0.72rem;
+      color: rgba(122, 144, 181, 0.6);
+      letter-spacing: 1px;
+      position: relative;
+      z-index: 1;
+      animation: plFadeIn 0.5s ease 1.5s both;
+    }
+
+    @keyframes plFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
   </style>
 </head>
 
 <body>
+
+  <!-- PRELOADER -->
+  <div id="preloader" role="status" aria-label="Loading portfolio">
+    <!-- floating background words -->
+    <div class="pl-word" style="left:5%;animation-duration:9s;animation-delay:0s;">SQL</div>
+    <div class="pl-word" style="left:18%;animation-duration:11s;animation-delay:1.5s;">Python</div>
+    <div class="pl-word" style="left:35%;animation-duration:8s;animation-delay:3s;">Power BI</div>
+    <div class="pl-word" style="left:55%;animation-duration:12s;animation-delay:0.8s;">Tableau</div>
+    <div class="pl-word" style="left:72%;animation-duration:10s;animation-delay:2.2s;">Excel</div>
+    <div class="pl-word" style="left:85%;animation-duration:9s;animation-delay:4s;">Pandas</div>
+    <div class="pl-word" style="left:42%;animation-duration:13s;animation-delay:5s;">Analytics</div>
+    <div class="pl-word" style="left:62%;animation-duration:7s;animation-delay:6s;">Insights</div>
+    <!-- main content -->
+    <div class="pl-logo">Kundan.</div>
+    <div class="pl-role">Data Analyst</div>
+    <div class="pl-bar-wrap">
+      <div class="pl-bar"></div>
+    </div>
+    <div class="pl-tag">Loading portfolio&hellip;</div>
+  </div>
 
   <!-- CURSOR GLOW -->
   <div class="cursor-glow" id="cursorGlow"></div>
@@ -2053,6 +2267,41 @@
   </footer>
 
   <script>
+    // ── PRELOADER ─────────────────────────────────────────────
+    (function () {
+      var pl = document.getElementById('preloader');
+      // Lock scroll while loading
+      document.body.style.overflow = 'hidden';
+
+      var pageReady = false;
+      var minTimeDone = false;
+
+      function tryDismiss() {
+        if (!pageReady || !minTimeDone) return;
+        pl.classList.add('hide');
+        document.body.style.overflow = '';
+        // Remove from DOM after fade-out transition
+        setTimeout(function () {
+          if (pl && pl.parentNode) pl.parentNode.removeChild(pl);
+        }, 750);
+      }
+
+      // Minimum display time — let the animation fully play (1.8s)
+      setTimeout(function () { minTimeDone = true; tryDismiss(); }, 1800);
+
+      // Fire when all resources (images, fonts) are loaded
+      window.addEventListener('load', function () {
+        pageReady = true;
+        tryDismiss();
+      });
+
+      // Safety net: force-dismiss after 5s no matter what
+      setTimeout(function () {
+        pageReady = true; minTimeDone = true; tryDismiss();
+      }, 5000);
+    })();
+    // ─────────────────────────────────────────────────────────
+
     // ── THEME SYSTEM ──────────────────────────────────────────
     // NOTE: theme is already applied in <head> to avoid flash.
     // Here we just wire up the toggle button and icon.
